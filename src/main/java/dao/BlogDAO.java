@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,9 +60,11 @@ public class BlogDAO {
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
                 String content = rs.getString("content");
-                String createdAt = rs.getString("created_at");
+                LocalDateTime createdAt = rs.getTimestamp("created_at").toLocalDateTime();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+                String formattedDate = createdAt.format(formatter);
 
-                Blog blog = new Blog(id, userId, title, content, createdAt);
+                Blog blog = new Blog(id, userId, title, content, formattedDate);
                 blogList.add(blog);
             }
         } catch (SQLException e) {
@@ -81,8 +85,10 @@ public class BlogDAO {
                         int id = rs.getInt("id");
                         String title = rs.getString("title");
                         String content = rs.getString("content");
-                        String createdAt = rs.getString("created_at");
-                        Blog blog = new Blog(id, userId, title, content, createdAt);
+                        LocalDateTime createdAt = rs.getTimestamp("created_at").toLocalDateTime();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+                        String formattedDate = createdAt.format(formatter);
+                        Blog blog = new Blog(id, userId, title, content, formattedDate);
                         blogList.add(blog);
                     }
                 }
@@ -104,8 +110,10 @@ public class BlogDAO {
                         String userId = rs.getString("user_id");
                         String title = rs.getString("title");
                         String content = rs.getString("content");
-                        String createdAt = rs.getString("created_at");
-                        Blog blog = new Blog(id, userId, title, content, createdAt);
+                        LocalDateTime createdAt = rs.getTimestamp("created_at").toLocalDateTime();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+                        String formattedDate = createdAt.format(formatter);
+                        Blog blog = new Blog(id, userId, title, content, formattedDate);
                         blogList.add(blog);
                     }
                 }

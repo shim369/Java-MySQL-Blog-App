@@ -36,7 +36,7 @@
 	</header>
 	<main>
 		<div class="container p-5">
-			<h2>ブログ一覧</h2>
+			<h2 class="mb-3">ブログ一覧</h2>
 			<div class="row">
 				<c:forEach var="blog" items="${blogList}">
 					<div class="col">
@@ -45,6 +45,7 @@
 							<div class="card-body">
 								<h5 class="card-title">${blog.title}</h5>
 								<p class="card-text">${blog.content}</p>
+								<p class="card-text">${blog.createdAt}</p>
 							</div>
 						</div>
 					</div>
