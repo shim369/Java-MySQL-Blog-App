@@ -38,7 +38,6 @@ public class AccountsDAO {
 				String name = rs.getString("name");
 				int age = rs.getInt("age");
 				account = new Account(userId, pass, mail, name, age);
-				// System.out.println( "ID:"+id + " , "+"名前:" + name + " , " +"テキスト:"+ text );
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
