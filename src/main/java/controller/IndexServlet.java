@@ -2,9 +2,11 @@ package controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import dao.BlogDAO;
-import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.AsyncContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,45 +14,42 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Blog;
 
-/**
- * Servlet implementation class WelcomeServlet
- */
-@WebServlet("/IndexServlet")
+@WebServlet(urlPatterns = "/IndexServlet", asyncSupported = true)
 public class IndexServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private static final long serialVersionUID = 1L;
+    private static final Logger LOGGER = Logger.getLogger(IndexServlet.class.getName());
+
     public IndexServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        BlogDAO blogDAO = new BlogDAO();
-	    List<Blog> blogList = blogDAO.findAll();
-	    
-	    if (blogList.isEmpty()) {
-	        System.out.println("No blogs found");
-	    } else {
-	        System.out.println("Blogs found: " + blogList.size());
-	    }
+        final AsyncContext asyncContext = request.startAsync();
+        asyncContext.start(() -> {
+            try {
+                BlogDAO blogDAO = new BlogDAO();
+                List<Blog> blogList = blogDAO.findAll();
+                
+                // デバッグ用ログ出力
+                LOGGER.log(Level.INFO, "Fetched blog list: {0}", blogList);
 
-	    request.setAttribute("blogList", blogList);
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
-	    dispatcher.forward(request, response);
-	}
+                // リクエストにデータを設定
+                request.setAttribute("blogList", blogList);
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+                // 非同期処理完了後にフォワードを行う
+                asyncContext.dispatch("/WEB-INF/jsp/index.jsp");
+            } catch (Exception e) {
+                LOGGER.log(Level.SEVERE, "Error in async process", e);
+                try {
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal server error occurred");
+                } catch (IOException ioException) {
+                    LOGGER.log(Level.SEVERE, "Failed to send error response", ioException);
+                }
+            } 
+        });
+    }
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 }
