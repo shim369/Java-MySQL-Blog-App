@@ -6,20 +6,23 @@ public class Blog {
     private String title;
     private String content;
     private String createdAt;
+    private String imageUrl;
 
     public Blog() {}
 
-    public Blog(String userId, String title, String content) {
+    public Blog(String userId, String title, String content, String imageUrl) {
         this.userId = userId;
         this.title = title;
         this.content = content;
+        this.imageUrl = imageUrl;
     }
-    public Blog(int id, String userId, String title, String content, String createdAt) {
+    public Blog(int id, String userId, String title, String content, String createdAt, String imageUrl) {
         this.id = id;
         this.userId = userId;
         this.title = title;
         this.content = content;
         this.createdAt = createdAt;
+        this.imageUrl = imageUrl;
     }
 
     public int getId() {
@@ -60,5 +63,13 @@ public class Blog {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+    
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

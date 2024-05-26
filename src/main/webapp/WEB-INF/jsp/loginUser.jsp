@@ -11,7 +11,7 @@
 	rel="stylesheet"
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
-
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<header class="shadow">
@@ -40,7 +40,7 @@
 	<main>
 		<div class="container p-5">
 			<h2 class="mb-3">ブログを投稿する</h2>
-			<form action="PostBlogServlet" method="post">
+			<form action="PostBlogServlet" method="post" enctype="multipart/form-data">
 
 				<div class="mb-3">
 					<label class="form-label">タイトル</label> <input type="text"
@@ -49,6 +49,10 @@
 				<div class="mb-3">
 					<label class="form-label">内容</label>
 					<textarea name="content" rows="5" cols="50" class="form-control"></textarea>
+				</div>
+				<div class="mb-3">
+					<label for="image" class="form-label">画像</label> <input type="file"
+						class="form-control" id="image" name="image_url" required>
 				</div>
 				<input type="submit" value="投稿" class="btn btn-primary"> <input
 					type="hidden" name="userId" value="${userId}">
@@ -61,7 +65,17 @@
 				<c:forEach var="blog" items="${blogList}">
 					<div class="col">
 						<div class="card mb-5" style="width: 18rem;">
-							<!--<img src="..." class="card-img-top" alt="...">  -->
+							<c:choose>
+								<c:when test="${empty blog.imageUrl}">
+									<img
+										src="${pageContext.request.contextPath}/images/dummy.png"
+										class="card-img-top custom-img" alt="No Image">
+								</c:when>
+								<c:otherwise>
+									<img src="${pageContext.request.contextPath}/${blog.imageUrl}"
+										class="card-img-top custom-img" alt="${blog.title}">
+								</c:otherwise>
+							</c:choose>
 							<div class="card-body">
 								<h5 class="card-title">${blog.title}</h5>
 								<p class="card-text">${blog.content}</p>
