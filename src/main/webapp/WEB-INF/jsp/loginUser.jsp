@@ -39,7 +39,7 @@
 	</header>
 	<main>
 		<div class="container p-5">
-			<h2 class="mb-5">ブログを投稿する</h2>
+			<h2 class="mb-5 text-center">ブログを投稿する</h2>
 			<form action="PostBlogServlet" method="post" enctype="multipart/form-data">
 
 				<div class="mb-3">
