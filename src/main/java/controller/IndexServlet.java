@@ -15,14 +15,14 @@ import model.Blog;
 /**
  * Servlet implementation class WelcomeServlet
  */
-@WebServlet("/WelcomeServlet")
-public class WelcomeServlet extends HttpServlet {
+@WebServlet("/IndexServlet")
+public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WelcomeServlet() {
+    public IndexServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +36,7 @@ public class WelcomeServlet extends HttpServlet {
         List<Blog> blogList = blogDAO.findAll();
 
 	    request.setAttribute("blogList", blogList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/welcome.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
 		dispatcher.forward(request, response);
 	}
 

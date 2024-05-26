@@ -57,7 +57,7 @@ public class PostBlogServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else {
 			request.setAttribute("errorMsg", "ブログの投稿に失敗しました。");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/loginOK.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/loginUser.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

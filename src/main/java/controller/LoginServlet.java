@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
 
 	        request.setAttribute("blogList", blogList);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/loginUserPage.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/loginUser.jsp");
 			dispatcher.forward(request, response);
 		}
 		else {
