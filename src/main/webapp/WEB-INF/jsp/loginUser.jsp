@@ -39,7 +39,7 @@
 	</header>
 	<main>
 		<div class="container p-5">
-			<h2 class="mb-3">ブログを投稿する</h2>
+			<h2 class="mb-5">ブログを投稿する</h2>
 			<form action="PostBlogServlet" method="post" enctype="multipart/form-data">
 
 				<div class="mb-3">
@@ -57,14 +57,14 @@
 				<input type="submit" value="投稿" class="btn btn-primary"> <input
 					type="hidden" name="userId" value="${userId}">
 			</form>
-			<h2 class="mt-5 mb-3">
+			<h2 class="mt-5 mb-5 text-center">
 				<c:out value="${userId}" />
 				さんのブログ一覧
 			</h2>
 			<div class="row">
 				<c:forEach var="blog" items="${blogList}">
-					<div class="col">
-						<div class="card mb-5" style="width: 18rem;">
+					<div class="col-12 col-md-4">
+						<div class="card mb-5 m-auto">
 							<c:choose>
 								<c:when test="${empty blog.imageUrl}">
 									<img

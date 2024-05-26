@@ -36,11 +36,11 @@
 	</header>
 	<main>
 		<div class="container p-5">
-			<h2 class="mb-5">ブログ一覧</h2>
+			<h2 class="mb-5 text-center">ブログ一覧</h2>
 			<div class="row" id="blogListContainer">
 				<c:forEach var="blog" items="${blogList}">
-					<div class="col">
-						<div class="card mb-5" style="width: 18rem;">
+					<div class="col-12 col-md-4">
+						<div class="card mb-5 m-auto">
 							<c:choose>
 								<c:when test="${empty blog.imageUrl}">
 									<img
