@@ -32,12 +32,18 @@ public class IndexServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	    BlogDAO blogDAO = new BlogDAO();
-        List<Blog> blogList = blogDAO.findAll();
+		BlogDAO blogDAO = new BlogDAO();
+	    List<Blog> blogList = blogDAO.findAll();
+	    
+	    if (blogList.isEmpty()) {
+	        System.out.println("No blogs found");
+	    } else {
+	        System.out.println("Blogs found: " + blogList.size());
+	    }
 
 	    request.setAttribute("blogList", blogList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
-		dispatcher.forward(request, response);
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
+	    dispatcher.forward(request, response);
 	}
 
 	/**
