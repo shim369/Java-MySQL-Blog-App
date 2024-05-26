@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+.custom-img {
+	max-height: 200px;
+	object-fit: cover;
+}
