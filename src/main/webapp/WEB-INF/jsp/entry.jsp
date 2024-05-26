@@ -16,7 +16,7 @@
 	<header class="shadow">
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="WelcomeServlet">Java Blog</a>
+				<a class="navbar-brand" href="IndexServlet">Java Blog</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
 					aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -25,7 +25,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav ms-auto mb-2 mb-lg-0">
-						<a class="nav-link" href="WelcomeServlet">ホーム</a>
+						<a class="nav-link" href="IndexServlet">ホーム</a>
 						<a class="nav-link" href="LoginServlet">ログイン</a>
 						<a class="nav-link" href="EntryServlet">ユーザー登録</a>
 					</div>
