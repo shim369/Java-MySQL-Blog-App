@@ -34,7 +34,7 @@
 	</header>
 	<main>
 		<div class="container p-5">
-			<h2>ログイン</h2>
+			<h2 class="mb-5 text-center">ログイン</h2>
 			<form action="LoginServlet" method="post">
 				<div class="mb-3">
 					<label class="form-label">ユーザーID</label> <input type="text" name="userId"

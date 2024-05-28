@@ -42,9 +42,10 @@ Account account = (Account)request.getAttribute( "account" );
 	</header>
 	<main>
 		<div class="container p-5">
+		<h2 class="mb-5 text-center">ユーザー登録</h2>
 		<% if( account != null ) { %>
 			<p>エントリーに成功しました</p>
-			<a href="WelcomeServlet"> WelcomeServletへ</a>
+			<a href="IndexServlet"> IndexServletへ</a>
 		<% } else { %>
 			<p>エントリーに失敗しました</p>
 			<a href="EntryServlet"> EntryServletへ</a>

@@ -35,7 +35,7 @@
 	</header>
 	<main>
 		<div class="container p-5">
-			<h2>ユーザー登録</h2>
+			<h2 class="mb-5 text-center">ユーザー登録</h2>
 			<form action="EntryServlet" method="post">
 				<div class="mb-3">
 					<label class="form-label">ユーザーID</label> <input type="text"

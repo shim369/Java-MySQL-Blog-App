@@ -35,7 +35,7 @@
 	</header>
 	<main>
 		<div class="container p-5">
-			<h2>ブログ投稿成功</h2>
+			<h2 class="mb-5 text-center">ブログ投稿成功</h2>
 			<p>ブログの投稿が成功しました。</p>
 			<a href="PostBlogServlet">別のブログを投稿する</a> <a href="IndexServlet">トップへ</a>
 		</div>
