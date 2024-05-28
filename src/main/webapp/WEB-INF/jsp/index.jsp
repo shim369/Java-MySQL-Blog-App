@@ -43,8 +43,7 @@
 						<div class="card mb-5 m-auto">
 							<c:choose>
 								<c:when test="${empty blog.imageUrl}">
-									<img
-										src="${pageContext.request.contextPath}/images/dummy.png"
+									<img src="${pageContext.request.contextPath}/images/dummy.png"
 										class="card-img-top custom-img" alt="No Image">
 								</c:when>
 								<c:otherwise>
@@ -54,8 +53,34 @@
 							</c:choose>
 							<div class="card-body">
 								<h5 class="card-title">${blog.title}</h5>
-								<p class="card-text">${blog.content}</p>
 								<p class="card-text">${blog.createdAt}</p>
+								<button type="button" class="btn btn-primary"
+									data-bs-toggle="modal" data-bs-target="#modal${blog.id}">
+									記事表示</button>
+
+								<!-- モーダルの設定 -->
+								<div class="modal fade" id="modal${blog.id}" tabindex="-1"
+									aria-labelledby="exampleModalLabel">
+									<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h1 class="modal-title fs-5" id="exampleModalLabel">${blog.title}</h1>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="閉じる"></button>
+											</div>
+											<div class="modal-body">
+												<p class="card-text">${blog.content}</p>
+											</div>
+											<div class="modal-footer">
+												<p>${blog.createdAt}</p>
+											</div>
+											<!-- /.modal-footer -->
+										</div>
+										<!-- /.modal-content -->
+									</div>
+									<!-- /.modal-dialog -->
+								</div>
+								<!-- /.modal -->
 							</div>
 						</div>
 					</div>
