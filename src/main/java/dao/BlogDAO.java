@@ -41,6 +41,34 @@ public class BlogDAO {
             return false;
         }
     }
+    
+    public void update(Blog blog) throws SQLException {
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+        	String sql = "UPDATE blogs SET title=?, content=?, image_url=? WHERE id=?";
+        	PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, blog.getTitle());
+			pStmt.setString(2, blog.getContent());
+            pStmt.setString(3, blog.getImageUrl());
+			pStmt.setInt(4, blog.getId());
+			pStmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	
+    }
+    
+    public void delete(int blogId) {
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+            String sql = "DELETE FROM blogs WHERE id = ?";
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setInt(1, blogId);
+
+            pStmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public List<Blog> findByUserId(String userId) {
         List<Blog> blogList = new ArrayList<>();
