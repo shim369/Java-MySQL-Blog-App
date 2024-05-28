@@ -11,9 +11,10 @@
 	rel="stylesheet"
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="bg-body-tertiary">
 	<header class="shadow">
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 			<div class="container-fluid">
@@ -53,7 +54,7 @@
 							</c:choose>
 							<div class="card-body">
 								<h5 class="card-title">${blog.title}</h5>
-								<p class="card-text">${blog.createdAt}</p>
+								<p class="card-text date-icon"><i class="bi bi-clock"></i>${blog.createdAt}</p>
 								<button type="button" class="btn btn-primary"
 									data-bs-toggle="modal" data-bs-target="#modal${blog.id}">
 									記事表示</button>
@@ -72,7 +73,7 @@
 												<p class="card-text">${blog.content}</p>
 											</div>
 											<div class="modal-footer">
-												<p>${blog.createdAt}</p>
+												<p class="date-icon"><i class="bi bi-clock"></i>${blog.createdAt}</p>
 											</div>
 											<!-- /.modal-footer -->
 										</div>
