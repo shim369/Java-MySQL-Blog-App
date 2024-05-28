@@ -9,13 +9,22 @@ public class Blog {
     private String imageUrl;
 
     public Blog() {}
-
+    
     public Blog(String userId, String title, String content, String imageUrl) {
         this.userId = userId;
         this.title = title;
         this.content = content;
         this.imageUrl = imageUrl;
     }
+    
+    public Blog(int id, String userId, String title, String content, String imageUrl) {
+        this.id = id;
+        this.userId = userId;
+        this.title = title;
+        this.content = content;
+        this.imageUrl = imageUrl;
+    }
+
     public Blog(int id, String userId, String title, String content, String createdAt, String imageUrl) {
         this.id = id;
         this.userId = userId;
