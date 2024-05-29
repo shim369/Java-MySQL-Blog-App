@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
 import beans.Blog;
@@ -41,9 +42,22 @@ public class PostBlogServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/loginUser.jsp");
-		dispatcher.forward(request, response);
+        String userId = request.getParameter("userId");
+        if (userId == null) {
+            // ログインしていない場合はログインページにリダイレクト
+            response.sendRedirect("LoginServlet");
+            return;
+        }
+
+        // ユーザーのブログ一覧を取得
+        BlogDAO blogDAO = new BlogDAO();
+        List<Blog> blogList = blogDAO.findByUserId(userId);
+
+        // JSPに渡す
+        request.setAttribute("blogList", blogList);
+        request.setAttribute("userId", userId);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/loginUser.jsp");
+        dispatcher.forward(request, response);
 	}
 
 	/**
