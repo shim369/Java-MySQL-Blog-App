@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import model.Account;
-import model.Login;
+import beans.Account;
+import beans.Login;
 
 public class AccountsDAO {
 	private final String JDBC_URL = "jdbc:mysql://localhost/javablog?characterEncoding=UTF-8&serverTimezone=Asia/Tokyo";

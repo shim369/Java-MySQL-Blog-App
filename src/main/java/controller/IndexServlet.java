@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import beans.Blog;
 import dao.BlogDAO;
 import jakarta.servlet.AsyncContext;
 import jakarta.servlet.ServletException;
@@ -12,7 +13,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Blog;
 
 @WebServlet(urlPatterns = "/IndexServlet", asyncSupported = true)
 public class IndexServlet extends HttpServlet {

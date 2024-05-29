@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import beans.Account;
 import dao.AccountsDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -10,7 +11,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Account;
 import model.EntryLogic;
 
 /**

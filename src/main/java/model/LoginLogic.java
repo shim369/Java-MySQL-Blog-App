@@ -1,5 +1,7 @@
 package model;
 
+import beans.Account;
+import beans.Login;
 import dao.AccountsDAO;
 
 public class LoginLogic {
