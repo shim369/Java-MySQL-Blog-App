@@ -7,6 +7,7 @@ public class Blog {
     private String content;
     private String createdAt;
     private String imageUrl;
+    private String userName;
 
     public Blog() {}
     
@@ -25,13 +26,14 @@ public class Blog {
         this.imageUrl = imageUrl;
     }
 
-    public Blog(int id, String userId, String title, String content, String createdAt, String imageUrl) {
+    public Blog(int id, String userId, String title, String content, String createdAt, String imageUrl, String userName) {
         this.id = id;
         this.userId = userId;
         this.title = title;
         this.content = content;
         this.createdAt = createdAt;
         this.imageUrl = imageUrl;
+        this.userName = userName;
     }
 
     public int getId() {
@@ -80,5 +82,13 @@ public class Blog {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+    
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

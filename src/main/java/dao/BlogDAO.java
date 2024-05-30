@@ -86,8 +86,9 @@ public class BlogDAO {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                 String formattedDate = createdAt.format(formatter);
                 String imageUrl = rs.getString("image_url");
+                String userName = rs.getString("name");
 
-                Blog blog = new Blog(id, userId, title, content, formattedDate, imageUrl);
+                Blog blog = new Blog(id, userId, title, content, formattedDate, imageUrl, userName);
                 blogList.add(blog);
             }
         } catch (SQLException e) {
@@ -113,8 +114,9 @@ public class BlogDAO {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                 String formattedDate = createdAt.format(formatter);
                 String imageUrl = rs.getString("image_url");
+                String userName = rs.getString("name");
 
-                Blog blog = new Blog(id, userId, title, content, formattedDate, imageUrl);
+                Blog blog = new Blog(id, userId, title, content, formattedDate, imageUrl, userName);
                 blogList.add(blog);
             }
         } catch (SQLException e) {
@@ -127,7 +129,9 @@ public class BlogDAO {
     public List<Blog> findAll() {
         List<Blog> blogList = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-            String sql = "SELECT id, user_id, title, content, created_at, image_url FROM blogs";
+        	String sql = "SELECT b.id, b.user_id, b.title, b.content, b.created_at, b.image_url, a.name "
+                    + "FROM blogs b "
+                    + "JOIN accounts a ON b.user_id = a.user_id";
             PreparedStatement pStmt = conn.prepareStatement(sql);
 
             ResultSet rs = pStmt.executeQuery();
@@ -140,8 +144,9 @@ public class BlogDAO {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                 String formattedDate = createdAt.format(formatter);
                 String imageUrl = rs.getString("image_url");
+                String userName = rs.getString("name");
 
-                Blog blog = new Blog(id, userId, title, content, formattedDate, imageUrl);
+                Blog blog = new Blog(id, userId, title, content, formattedDate, imageUrl, userName);
                 blogList.add(blog);
             }
         } catch (SQLException e) {
