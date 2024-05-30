@@ -24,15 +24,15 @@
 				enctype="multipart/form-data">
 				<div class="mb-3">
 					<label class="form-label">タイトル</label> <input type="text"
-						name="title" class="form-control">
+						name="title" class="form-control" required>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">内容</label>
-					<textarea name="content" rows="5" cols="50" class="form-control"></textarea>
+					<textarea name="content" rows="5" cols="50" class="form-control" required></textarea>
 				</div>
 				<div class="mb-3">
 					<label for="image" class="form-label">画像</label> <input type="file"
-						class="form-control" id="image" name="image_url" required>
+						class="form-control" id="image" name="image_url">
 				</div>
 				<input type="submit" value="投稿" class="btn btn-primary"> <input
 					type="hidden" name="userId" value="${userId}">
