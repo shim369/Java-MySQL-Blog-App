@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="model.Account" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="beans.Account" %>
 <%
 Account account = (Account)request.getAttribute( "account" );
 %>
@@ -21,13 +22,16 @@ Account account = (Account)request.getAttribute( "account" );
 	<main>
 		<div class="container p-5">
 		<h2 class="mb-5 text-center">ユーザー登録</h2>
-		<% if( account != null ) { %>
-			<p>エントリーに成功しました</p>
-			<a href="IndexServlet"> IndexServletへ</a>
-		<% } else { %>
-			<p>エントリーに失敗しました</p>
-			<a href="EntryServlet"> EntryServletへ</a>
-		<% } %>
+			<c:choose>
+				<c:when test="${account != null}">
+					<p>ユーザー登録に成功しました</p>
+					<a href="PostBlogServlet?userId=${sessionScope.userId}">${sessionScope.userId}さんのページへ</a>
+				</c:when>
+				<c:otherwise>
+					<p>ユーザー登録に失敗しました</p>
+					<a href="EntryServlet">ユーザー登録画面へ</a>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</main>
 	<script
