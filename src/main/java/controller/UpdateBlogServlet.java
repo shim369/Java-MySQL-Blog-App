@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 
 import beans.Blog;
@@ -18,12 +19,13 @@ import jakarta.servlet.http.Part;
 @MultipartConfig
 public class UpdateBlogServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private static final String UPLOAD_DIR = "uploads";
 
     public UpdateBlogServlet() {
         super();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         BlogDAO blogDAO = new BlogDAO();
 
@@ -32,33 +34,28 @@ public class UpdateBlogServlet extends HttpServlet {
             String userId = request.getParameter("userId");
             String title = request.getParameter("title");
             String content = request.getParameter("content");
+            String existingImageUrl = request.getParameter("existingImageUrl");
+
             Part filePart = request.getPart("image_url");
-
-            if (filePart == null) {
-                System.out.println("File part is null");
-            } else {
-                System.out.println("File part is not null");
-                System.out.println("File name: " + getSubmittedFileName(filePart));
-                System.out.println("File size: " + filePart.getSize());
-            }
-
-            String fileName = getSubmittedFileName(filePart);
-            String filePath = null;
-
+            String fileName = null;
             if (filePart != null && filePart.getSize() > 0) {
-                String uploadDir = getServletContext().getRealPath("/uploads");
-                File uploadDirFile = new File(uploadDir);
-                if (!uploadDirFile.exists()) {
-                    uploadDirFile.mkdirs();
-                }
-                filePath = uploadDir + File.separator + fileName;
-                filePart.write(filePath);
-            } else {
-                fileName = "dummy.png";
+                fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) uploadDir.mkdir();
+                filePart.write(uploadPath + File.separator + fileName);
             }
 
-            String imageUrl = "uploads/" + fileName;
-            Blog blog = new Blog(id, userId, title, content, imageUrl);
+            Blog blog = new Blog();
+            blog.setId(id);
+            blog.setUserId(userId);
+            blog.setTitle(title);
+            blog.setContent(content);
+            if (fileName != null) {
+                blog.setImageUrl(UPLOAD_DIR + "/" + fileName);
+            } else {
+                blog.setImageUrl(existingImageUrl);
+            }
 
             blogDAO.update(blog);
 
@@ -67,18 +64,5 @@ public class UpdateBlogServlet extends HttpServlet {
             e.printStackTrace();
             request.getRequestDispatcher("/WEB-INF/jsp/loginUser.jsp").forward(request, response);
         }
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
-
-    private String getSubmittedFileName(Part part) {
-        for (String cd : part.getHeader("content-disposition").split(";")) {
-            if (cd.trim().startsWith("filename")) {
-                return cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
-            }
-        }
-        return null;
     }
 }

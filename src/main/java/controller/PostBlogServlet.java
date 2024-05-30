@@ -80,7 +80,7 @@ public class PostBlogServlet extends HttpServlet {
 	        if (!uploadDirFile.exists()) {
 	            uploadDirFile.mkdirs();
 	        }
-	        filePath = uploadDir + File.separator + fileName; // Set filePath
+	        filePath = uploadDir + File.separator + fileName;
 	        filePart.write(filePath);
 	    } else {
 	        fileName = "dummy.png";

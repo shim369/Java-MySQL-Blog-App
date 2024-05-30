@@ -81,6 +81,8 @@
 													enctype="multipart/form-data">
 													<input type="hidden" name="id" value="${blog.id}">
 													<input type="hidden" name="userId" value="${blog.userId}">
+													<input type="hidden" name="existingImageUrl"
+														value="${blog.imageUrl}">
 													<div class="mb-3">
 														<label for="title" class="form-label">タイトル：</label> <input
 															type="text" name="title" id="title" class="form-control"
@@ -97,7 +99,8 @@
 														<div class="mt-2">
 															<label for="previewImage" class="form-label">現在の画像：</label>
 															<img id="previewImage"
-																src="<c:if test='${not empty blog.imageUrl}'>${pageContext.request.contextPath}/${blog.imageUrl}</c:if>"
+																src="<c:if test='${not empty blog.imageUrl}'>${pageContext.request.contextPath}/${blog.imageUrl}</c:if>
+            <c:if test='${empty blog.imageUrl}'>${pageContext.request.contextPath}/images/dummy.png</c:if>"
 																alt="Current Image" class="img-thumbnail">
 														</div>
 													</div>
@@ -105,6 +108,7 @@
 														<button type="submit" class="btn btn-success">更新</button>
 													</div>
 												</form>
+
 											</div>
 											<div class="modal-footer">
 												<p class="date-icon">
