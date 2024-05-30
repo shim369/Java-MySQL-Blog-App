@@ -14,22 +14,18 @@
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <a class="nav-link" href="IndexServlet">ホーム</a>
-                    <%
-                        String userId = (String) session.getAttribute("userId");
-                        if (userId == null) {
-                    %>
-                    <a class="nav-link" href="LoginServlet">ログイン</a>
-                    <a class="nav-link" href="EntryServlet">ユーザー登録</a>
-                    <%
-                        } else {
-                    %>
-                    <a class="nav-link" href="PostBlogServlet?userId=<%= userId %>">
-                        <c:out value="<%= userId %>" /> さん
-                    </a>
-                    <a class="nav-link" href="LogoutServlet">ログアウト</a>
-                    <%
-                        }
-                    %>
+                    <c:choose>
+                        <c:when test="${empty sessionScope.userId}">
+                            <a class="nav-link" href="LoginServlet">ログイン</a>
+                            <a class="nav-link" href="EntryServlet">ユーザー登録</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="nav-link" href="PostBlogServlet?userId=${sessionScope.userId}">
+                                <c:out value="${sessionScope.userId}" /> さん
+                            </a>
+                            <a class="nav-link" href="LogoutServlet">ログアウト</a>
+                        </c:otherwise>
+                    </c:choose>
 				</div>
 			</div>
 		</div>
