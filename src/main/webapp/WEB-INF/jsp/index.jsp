@@ -13,7 +13,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body class="bg-body-tertiary">
 	<%@ include file="header.jsp"%>
@@ -24,16 +24,19 @@
 				<c:forEach var="blog" items="${blogList}">
 					<div class="col-12 col-md-4">
 						<div class="card mb-5 m-auto">
-							<c:choose>
-								<c:when test="${empty blog.imageUrl}">
-									<img src="${pageContext.request.contextPath}/images/dummy.png"
-										class="card-img-top custom-img" alt="No Image">
-								</c:when>
-								<c:otherwise>
-									<img src="${pageContext.request.contextPath}/${blog.imageUrl}"
-										class="card-img-top custom-img" alt="${blog.title}">
-								</c:otherwise>
-							</c:choose>
+							<div class="img-box">
+								<p class="name-plate">${blog.userName}</p>
+								<c:choose>
+									<c:when test="${empty blog.imageUrl}">
+										<img src="${pageContext.request.contextPath}/images/dummy.png"
+											class="card-img-top custom-img" alt="No Image">
+									</c:when>
+									<c:otherwise>
+										<img src="${pageContext.request.contextPath}/${blog.imageUrl}"
+											class="card-img-top custom-img" alt="${blog.title}">
+									</c:otherwise>
+								</c:choose>
+							</div>
 							<div class="card-body">
 								<h5 class="card-title">${blog.title}</h5>
 								<p class="card-text date-icon">
