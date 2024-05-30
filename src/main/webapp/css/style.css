@@ -8,3 +8,17 @@
 .date-icon i::before {
 	margin-right: 5px;
 }
+
+.img-box {
+	position: relative;
+}
+
+.name-plate {
+    position: absolute;
+    background: #8282ab;
+    color: #fff;
+    padding: 8px;
+    margin-bottom: 0;
+    line-height: 1;
+    border-top-left-radius: 4px;
+}
